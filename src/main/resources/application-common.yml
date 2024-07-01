@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: mybank
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+        dialect: org.hibernate.dialect.Oracle12cDialect
+        temp:
+          use_jdbc_metadata_defaults: false
+server:
+  port: 8888
+#  servlet:
+#    context-path: /mybank
+jwt:
+  app:
+    jwt-secret: myBankaA@==!@#$%
+    jwt-expiration-ms: 86400000
