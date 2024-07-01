@@ -1,5 +1,6 @@
 package com.bank.mybank.config.security;
 
+import com.bank.mybank.config.jwt.JwtAuthenticationFilter;
 import com.bank.mybank.repository.IUserRepository;
 import com.bank.mybank.service.Impl.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,10 +44,10 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize ->
                         authorize
-                                .antMatchers("/test").permitAll()
+                                .antMatchers("/test","/auth/**").permitAll()
                                 .anyRequest().authenticated()
                 )
-                // .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .httpBasic(Customizer.withDefaults())
                 .exceptionHandling(
@@ -69,8 +70,8 @@ public class SecurityConfig {
         return authenticationProvider;
     }
 
-//    @Bean
-//    public JwtAuthenticationFilter jwtAuthenticationFilter(){
-//        return new JwtAuthenticationFilter();
-//    }
+    @Bean
+    public JwtAuthenticationFilter jwtAuthenticationFilter(){
+        return new JwtAuthenticationFilter();
+    }
 }

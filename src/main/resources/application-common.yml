@@ -1,6 +1,8 @@
 spring:
   application:
     name: mybank
+  main:
+    allow-bean-definition-overriding: true
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
@@ -20,3 +22,4 @@ jwt:
   app:
     jwt-secret: myBankaA@==!@#$%
     jwt-expiration-ms: 86400000
+
